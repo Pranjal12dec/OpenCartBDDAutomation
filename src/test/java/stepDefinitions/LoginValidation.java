@@ -1,8 +1,10 @@
 package stepDefinitions;
 
+import dataProviders.ConfigFileReader;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import managers.FileReaderManager;
 import managers.PageObjectManager;
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
@@ -16,13 +18,17 @@ public class LoginValidation {
     WebDriver driver;
     PageObjectManager pageObjectManager;
     LoginPage loginPage;
+    ConfigFileReader configFileReader;
 
     @Given("The user is on the Opencart Homepage")
     public void the_user_is_on_the_opencart_homepage() {
+        configFileReader = new ConfigFileReader();
         driver = new ChromeDriver();
         driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
-        driver.get("http://opencart.abstracta.us/");
+        driver.manage().timeouts().
+                implicitlyWait(Duration.ofSeconds
+                        (FileReaderManager.getInstance().getConfigFileReader().getImplicitWaitTime()));
+        driver.get(FileReaderManager.getInstance().getConfigFileReader().getApplicationURL());
     }
     @Given("User navigates to the login page")
     public void user_navigates_to_the_login_page() {
