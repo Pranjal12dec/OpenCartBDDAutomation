@@ -6,28 +6,22 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import managers.FileReaderManager;
 import managers.PageObjectManager;
+import managers.WebDriverManager;
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import pageObjects.LoginPage;
-
-import java.time.Duration;
 
 public class LoginValidation {
 
     WebDriver driver;
     PageObjectManager pageObjectManager;
     LoginPage loginPage;
-    ConfigFileReader configFileReader;
+    WebDriverManager webDriverManager;
 
     @Given("The user is on the Opencart Homepage")
     public void the_user_is_on_the_opencart_homepage() {
-        configFileReader = new ConfigFileReader();
-        driver = new ChromeDriver();
-        driver.manage().window().maximize();
-        driver.manage().timeouts().
-                implicitlyWait(Duration.ofSeconds
-                        (FileReaderManager.getInstance().getConfigFileReader().getImplicitWaitTime()));
+        webDriverManager = new WebDriverManager();
+        driver = webDriverManager.getDriver();
         driver.get(FileReaderManager.getInstance().getConfigFileReader().getApplicationURL());
     }
     @Given("User navigates to the login page")
