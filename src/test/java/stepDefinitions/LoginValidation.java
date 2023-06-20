@@ -1,39 +1,33 @@
 package stepDefinitions;
 
-import dataProviders.ConfigFileReader;
+import cucumber.TestContext;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import managers.FileReaderManager;
-import managers.PageObjectManager;
 import managers.WebDriverManager;
-import org.junit.Assert;
-import org.openqa.selenium.WebDriver;
 import pageObjects.LoginPage;
 
 public class LoginValidation {
-
-    WebDriver driver;
-    PageObjectManager pageObjectManager;
+    TestContext testContext;
     LoginPage loginPage;
-    WebDriverManager webDriverManager;
+
+    public LoginValidation(TestContext context){
+        testContext = context;
+        loginPage = testContext.getPageObjectManager().getLoginPage();
+    }
 
     @Given("The user is on the Opencart Homepage")
     public void the_user_is_on_the_opencart_homepage() {
-        webDriverManager = new WebDriverManager();
-        driver = webDriverManager.getDriver();
-        driver.get(FileReaderManager.getInstance().getConfigFileReader().getApplicationURL());
+        loginPage.navigateToHomepage();
     }
     @Given("User navigates to the login page")
     public void user_navigates_to_the_login_page() {
-        pageObjectManager = new PageObjectManager(driver);
-        loginPage = pageObjectManager.getLoginPage();
         loginPage.clickonAccountDropdown();
         loginPage.clickonLoginButton();
     }
     @When("The login screen appears")
     public void the_login_screen_appears() {
-        Assert.assertEquals(driver.getTitle(),"Account Login");
+        loginPage.checkLoginScreen("Account Login");
     }
     @Then("The user enters the {string} and {string}")
     public void the_user_enters_the_and(String username, String password) {
@@ -46,8 +40,8 @@ public class LoginValidation {
     }
     @Then("The user should be logged in or shown error message based on credentials")
     public void the_user_should_be_logged_in_or_shown_error_message_based_on_credentials() {
-        Assert.assertEquals(driver.getTitle(),"My Account");
-        driver.quit();
+        loginPage.checkLoginScreen("My Account");
+        testContext.getWebDriverManager().closeDriver();
     }
 
 }
