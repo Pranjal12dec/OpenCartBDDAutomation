@@ -13,4 +13,4 @@ Feature: Validate Login feature on Opencart Site
     Examples:
       | username                | password       |
       | qaopencart1@yopmail.com | QAopencart@123 |
-#      | qaopencart2@yopmail.com | QAopencart@123 |
+      | qaopencart2@yopmail.com | QAopencart@123 |
