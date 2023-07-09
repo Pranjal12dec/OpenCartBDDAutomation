@@ -12,7 +12,8 @@ import java.time.Duration;
 
 public class WebDriverManager {
 
-  private WebDriver driver;
+  private static final ThreadLocal<WebDriver> driverLocal = new ThreadLocal<>();
+  WebDriver driver = driverLocal.get();
   private static DriverType driverType;
   private static EnvironmentType environmentType;
 
@@ -22,7 +23,11 @@ public class WebDriverManager {
   }
 
   public WebDriver getDriver() {
-    return (driver == null) ? driver = createDriver() : driver;
+    if (driver == null) {
+      driver = createDriver();
+      driverLocal.set(driver);
+    }
+    return driver;
   }
 
   private WebDriver createDriver() {
@@ -38,7 +43,8 @@ public class WebDriverManager {
   }
 
   private WebDriver createRemoteDriver() {
-    throw new RuntimeException("RemoteWebDriver is not yet implemented");
+    throw new RuntimeException(
+        "RemoteWebDriver is not yet implemented. Please implement it in WebDriverManager Class");
   }
 
   private WebDriver createLocalDriver() {

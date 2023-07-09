@@ -1,16 +1,22 @@
 package runnerAndStepDefinitions;
 
-import io.cucumber.junit.Cucumber;
-import io.cucumber.junit.CucumberOptions;
-import org.junit.runner.RunWith;
+import io.cucumber.testng.CucumberOptions;
+import io.cucumber.testng.AbstractTestNGCucumberTests;
+import org.testng.annotations.DataProvider;
 
-@RunWith(Cucumber.class)
 @CucumberOptions(
     features = "src/test/resources/testCases",
-    glue = {"stepDefinitions"},
-    plugin = {"pretty", "com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:"},
+    glue = {"runnerAndStepDefinitions"},
+    plugin = {"pretty", "com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:",
+        "timeline:target/thread-report/", "rerun:target/failedTestCases.txt"},
     monochrome = true
 )
-public class Runner {
+public class Runner extends AbstractTestNGCucumberTests {
+
+  @Override
+  @DataProvider(parallel = true)
+  public Object[][] scenarios() {
+    return super.scenarios();
+  }
 
 }
