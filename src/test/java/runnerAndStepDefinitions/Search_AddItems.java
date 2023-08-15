@@ -30,4 +30,5 @@ public class Search_AddItems {
   public void theMacbookProSKUShouldGetAddedToTheCart() {
     searchPage.verifyAddtoCartMessage();
   }
+
 }

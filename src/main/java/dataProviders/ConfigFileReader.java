@@ -2,7 +2,6 @@ package dataProviders;
 
 import enums.DriverType;
 import enums.EnvironmentType;
-
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -11,8 +10,8 @@ import java.util.Properties;
 
 public class ConfigFileReader {
 
-  private Properties properties;
   private final String propertyFilePath = "src/test/resources/configs/Configuration.properties";
+  private Properties properties;
 
   public ConfigFileReader() {
     BufferedReader reader;

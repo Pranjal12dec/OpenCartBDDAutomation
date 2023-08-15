@@ -2,20 +2,19 @@ package managers;
 
 import enums.DriverType;
 import enums.EnvironmentType;
+import java.time.Duration;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.safari.SafariDriver;
 
-import java.time.Duration;
-
 public class WebDriverManager {
 
   private static final ThreadLocal<WebDriver> driverLocal = new ThreadLocal<>();
-  WebDriver driver = driverLocal.get();
   private static DriverType driverType;
   private static EnvironmentType environmentType;
+  WebDriver driver = driverLocal.get();
 
   public WebDriverManager() {
     driverType = FileReaderManager.getInstance().getConfigFileReader().getBrowser();

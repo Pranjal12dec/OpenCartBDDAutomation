@@ -1,3 +1,4 @@
+@search
 Feature: Validate Search and Add to Cart feature on Opencart Site
   Description: To validate that the user can search for an item and add it to the cart
 

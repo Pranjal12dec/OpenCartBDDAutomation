@@ -1,3 +1,4 @@
+@Login
 Feature: Validate Login feature on Opencart Site
   Description: To validate the login feature behaviour when user attempts to login using
   valid and invalid credentials
