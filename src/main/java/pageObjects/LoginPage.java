@@ -2,7 +2,6 @@ package pageObjects;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import managers.FileReaderManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -12,15 +11,15 @@ public class LoginPage {
 
   WebDriver driver;
   //Finding the Page WebElements
-  @FindBy(className = "caret")
+  @FindBy(xpath = "//span[normalize-space()='My Account']")
   private WebElement myAccountDropdown;
-  @FindBy(linkText = "Login")
+  @FindBy(xpath = "//a[normalize-space()='Login']")
   private WebElement loginButton;
   @FindBy(xpath = "//input[@id='input-email']")
   private WebElement emailField;
   @FindBy(xpath = "//input[@id='input-password']")
   private WebElement passwordField;
-  @FindBy(xpath = "//input[@type='submit']")
+  @FindBy(xpath = "//button[@type='submit']")
   private WebElement submitButton;
 
   public LoginPage(WebDriver driver) {
@@ -29,10 +28,6 @@ public class LoginPage {
   }
 
   //Public Methods
-
-  public void navigateToHomepage() {
-    driver.get(FileReaderManager.getInstance().getConfigFileReader().getApplicationURL());
-  }
 
   public void clickonAccountDropdown() {
     myAccountDropdown.click();

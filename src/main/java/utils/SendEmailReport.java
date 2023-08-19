@@ -28,6 +28,7 @@ public class SendEmailReport {
     log.info("-----------------------------------------------------------------------------");
     log.info("::::::::::::::::::::: Starting Email Send Process :::::::::::::::::::::");
     log.info("-----------------------------------------------------------------------------");
+    System.out.println("Email Send Process Started");
 
     //Setting the Recipient's email ID
     String to = FileReaderManager.getInstance().getConfigFileReader().getToEmailAddress();
@@ -46,6 +47,7 @@ public class SendEmailReport {
     //Email host details
     String host = "smtp.gmail.com";
     Properties props = new Properties();
+    props.put("mail.debug", "false");
     props.put("mail.smtp.auth", "true");
     props.put("mail.smtp.ssl.enable", "true");
     props.put("mail.smtp.host", host);
@@ -83,6 +85,7 @@ public class SendEmailReport {
 
       //send the email message
       Transport.send(message);
+      System.out.println("Email Send");
       log.info("-----------------------------------------------------------------------------");
       log.info("::::::::::::::::::::: Email Message Sent Successfully :::::::::::::::::::::");
       log.info("-----------------------------------------------------------------------------");

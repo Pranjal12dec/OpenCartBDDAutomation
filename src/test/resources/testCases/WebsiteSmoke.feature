@@ -1,8 +1,8 @@
 @Smoke
-  Feature: Verify that the website loads properly
-    Description: To verify that all elements appear on opening the opencart website. Also, verify the login feature
+Feature: Verify that the website loads properly
+  Description: To verify that all elements appear on opening the opencart website. Also, verify the login feature
 
-    Scenario: Running the Smoke test
+  Scenario: Running the Smoke test
     Given The user is on the Opencart Homepage
     Then The header should be available on the page
     And the Navigation Links should be available on the page

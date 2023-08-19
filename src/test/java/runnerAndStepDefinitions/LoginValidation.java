@@ -16,11 +16,6 @@ public class LoginValidation {
     loginPage = testContext.getPageObjectManager().getLoginPage();
   }
 
-  @Given("The user is on the Opencart Homepage")
-  public void the_user_is_on_the_opencart_homepage() {
-    loginPage.navigateToHomepage();
-  }
-
   @Given("User navigates to the login page")
   public void user_navigates_to_the_login_page() {
     loginPage.clickonAccountDropdown();

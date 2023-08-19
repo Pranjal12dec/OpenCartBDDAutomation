@@ -2,8 +2,8 @@ package runnerAndStepDefinitions;
 
 import cucumber.TestContext;
 import io.cucumber.java.en.And;
+import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
-import java.io.IOException;
 import pageObjects.HomePage;
 
 public class HomePageValidation {
@@ -16,9 +16,13 @@ public class HomePageValidation {
     homePage = testContext.getPageObjectManager().getHomePage();
   }
 
+  @Given("The user is on the Opencart Homepage")
+  public void the_user_is_on_the_opencart_homepage() {
+    homePage.navigateToHomepage();
+  }
+
   @Then("The header should be available on the page")
   public void theHeaderShouldBeAvailableOnThePage() {
-
     homePage.validateHeaderItems();
   }
 
@@ -28,22 +32,22 @@ public class HomePageValidation {
   }
 
   @And("the Hero Image carousel should be available on the page")
-  public void theHeroImageCarouselShouldBeAvailableOnThePage() throws IOException {
+  public void theHeroImageCarouselShouldBeAvailableOnThePage() {
     homePage.validateHeroImageCarousel();
   }
 
   @And("the Feature section items should be shown on the page")
-  public void theFeatureSectionItemsShouldBeShownOnThePage() throws IOException {
+  public void theFeatureSectionItemsShouldBeShownOnThePage() {
     homePage.validateFeaturedItems();
   }
 
   @And("the Brand carousel should be available on the page")
-  public void theBrandCarouselShouldBeAvailableOnThePage() throws IOException {
+  public void theBrandCarouselShouldBeAvailableOnThePage() {
     homePage.validateBrandCarousel();
   }
 
   @And("the Footer Links should be available on the page")
-  public void theFooterLinksShouldBeAvailableOnThePage() throws IOException {
+  public void theFooterLinksShouldBeAvailableOnThePage() {
     homePage.validateFooterLinks();
   }
 
