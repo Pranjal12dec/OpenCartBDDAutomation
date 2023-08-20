@@ -22,13 +22,12 @@ import org.apache.logging.log4j.Logger;
 
 public class SendEmailReport {
 
-  static Logger log = LogManager.getLogger(SendEmailReport.class);
+  private static final Logger log = LogManager.getLogger(SendEmailReport.class);
 
   public static void main(String[] args) {
     log.info("-----------------------------------------------------------------------------");
     log.info("::::::::::::::::::::: Starting Email Send Process :::::::::::::::::::::");
     log.info("-----------------------------------------------------------------------------");
-    System.out.println("Email Send Process Started");
 
     //Setting the Recipient's email ID
     String to = FileReaderManager.getInstance().getConfigFileReader().getToEmailAddress();
@@ -85,7 +84,6 @@ public class SendEmailReport {
 
       //send the email message
       Transport.send(message);
-      System.out.println("Email Send");
       log.info("-----------------------------------------------------------------------------");
       log.info("::::::::::::::::::::: Email Message Sent Successfully :::::::::::::::::::::");
       log.info("-----------------------------------------------------------------------------");

@@ -9,7 +9,7 @@ import org.testng.annotations.DataProvider;
     glue = {"runnerAndStepDefinitions"},
     plugin = {"pretty", "com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:",
         "timeline:target/thread-report/", "rerun:target/failedTestCases.txt"},
-    tags = "@Smoke",
+    tags = "@Smoke or @Login",
     monochrome = true
 )
 public class Runner extends AbstractTestNGCucumberTests {

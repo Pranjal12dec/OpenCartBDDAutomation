@@ -1,7 +1,5 @@
 package pageObjects;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
 import java.util.List;
 import managers.FileReaderManager;
 import org.openqa.selenium.JavascriptExecutor;
@@ -15,21 +13,15 @@ public class HomePage extends BaseUtils {
 
   WebDriver driver;
   JavascriptExecutor jse;
+
+
   //Page Elements
   @FindBy(id = "top")
   private WebElement nav_container;
-  @FindBy(xpath = "//span[normalize-space()='Currency']")
+  @FindBy(xpath = "//div[@class='btn-group']//span")
   private WebElement nav_item_currency;
-  @FindBy(xpath = "//span[normalize-space()='123456789']")
-  private WebElement nav_item_number;
-  @FindBy(xpath = "//span[normalize-space()='My Account']")
-  private WebElement nav_item_myAccount;
-  @FindBy(id = "wishlist-total")
-  private WebElement nav_wishlist_total;
-  @FindBy(xpath = "//span[normalize-space()='Shopping Cart']")
-  private WebElement nav_shopping_cart;
-  @FindBy(xpath = "//span[normalize-space()='Checkout']")
-  private WebElement nav_checkout;
+  @FindBy(xpath = "//ul[@class='list-inline']//i")
+  private List<WebElement> right_nav_items;
   @FindBy(id = "logo")
   private WebElement logo;
   @FindBy(id = "search")
@@ -70,38 +62,36 @@ public class HomePage extends BaseUtils {
     driver.get(FileReaderManager.getInstance().getConfigFileReader().getApplicationURL());
   }
 
-  public void validateHeaderItems() {
-    assertThat(nav_container.isDisplayed() && nav_item_currency.isDisplayed()
-        && nav_item_number.isDisplayed() && nav_item_myAccount.isDisplayed()
-        && nav_wishlist_total.isDisplayed() && nav_shopping_cart.isDisplayed()
-        && nav_checkout.isDisplayed()).isTrue();
+  public boolean validateHeaderItems() {
+    boolean isRightNavDisplayed = right_nav_items.size()>=5;
+    return (nav_container.isDisplayed() && nav_item_currency.isDisplayed()
+        && isRightNavDisplayed);
   }
 
-  public void validateNavigationItems() {
-    boolean navItemsVisible = (navItems_withChild.size() + navItems_withoutChild.size()) >= 8;
-    assertThat(logo.isDisplayed() && searchBox.isDisplayed() && headerCart.isDisplayed()
-        && navItemsVisible).isTrue();
+  public boolean validateNavigationItems() {
+    boolean isNavItemsVisible = (navItems_withChild.size() + navItems_withoutChild.size()) >= 8;
+    return (logo.isDisplayed() && searchBox.isDisplayed() && headerCart.isDisplayed()
+        && isNavItemsVisible);
   }
 
-  public void validateHeroImageCarousel() {
-    assertThat(carousel_container.isDisplayed()).isTrue();
+  public boolean validateHeroImageCarousel() {
     findBrokenElements(banner_items, "src");
+    return carousel_container.isDisplayed();
   }
 
-  public void validateFeaturedItems() {
-    assertThat(featuredSection_container.isDisplayed()).isTrue();
+  public boolean validateFeaturedItems() {
     findBrokenElements(featureditem_images, "src");
     findBrokenElements(featureditem_links, "href");
+    return featuredSection_container.isDisplayed();
   }
 
-  public void validateFooterLinks() {
-    assertThat(footer_Links.size()).isGreaterThanOrEqualTo(15);
-    findBrokenElements(footer_Links, "href");
-  }
-
-  public void validateBrandCarousel() {
-    assertThat(brandCarousel_container.isDisplayed()).isTrue();
+  public boolean validateBrandCarousel() {
     findBrokenElements(brand_logo_items, "src");
+    return brandCarousel_container.isDisplayed();
   }
 
+  public int validateFooterLinks() {
+    findBrokenElements(footer_Links, "href");
+    return footer_Links.size();
+  }
 }
