@@ -11,6 +11,7 @@ import org.apache.logging.log4j.Logger;
 import pageObjects.HomePage;
 
 public class HomePageValidation {
+
   private static final Logger log = LogManager.getLogger(HomePageValidation.class);
   TestContext testContext;
   HomePage homePage;

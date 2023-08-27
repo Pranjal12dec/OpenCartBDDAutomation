@@ -47,20 +47,23 @@ public class SearchPage extends BaseUtils {
     searchBox.sendKeys(keywords);
     searchButton.click();
   }
+
   public List<WebElement> sendProductNames() {
     return product_Names;
   }
 
-  public void addProvidedItem(String itemName){
+  public void addProvidedItem(String itemName) {
     //Adds the provided item to the cart
-    driver.findElement(By.xpath("//img[@title='"+itemName+"']//following::button[contains(@onclick,'cart.add')][1]")).click();
+    driver.findElement(By.xpath(
+            "//img[@title='" + itemName + "']//following::button[contains(@onclick,'cart.add')][1]"))
+        .click();
   }
 
-  public void clickCheckout(){
+  public void clickCheckout() {
     checkout.click();
   }
 
-  public String placeOrder(){
+  public String placeOrder() {
     boolean order_is_correct = false;
     log.info(":::::Clicking Billing Details Continue Button:::::");
     billingDetails_button.click();
@@ -75,7 +78,7 @@ public class SearchPage extends BaseUtils {
     log.info(":::::Clicking Confirm Order Button:::::");
     confirm_Order_Button.click();
 
-    waitUntilPageTitleIsFound(driver,"Your order has been placed!");
+    waitUntilPageTitleIsFound(driver, "Your order has been placed!");
 
     return driver.getTitle();
   }
