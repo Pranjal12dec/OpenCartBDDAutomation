@@ -2,11 +2,15 @@ package utils;
 
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class BaseUtils {
 
@@ -43,5 +47,11 @@ public class BaseUtils {
     } catch (Exception e) {
       log.error("Unable to connect using HTTP connection");
     }
+  }
+
+  public void waitUntilPageTitleIsFound(WebDriver driver, String pageTitle){
+    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+    log.info("::::: Waiting for Page Title::::: "+pageTitle+" To be displayed");
+    wait.until(ExpectedConditions.titleContains(pageTitle));
   }
 }

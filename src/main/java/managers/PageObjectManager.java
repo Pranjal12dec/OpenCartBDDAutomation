@@ -4,6 +4,7 @@ import org.openqa.selenium.WebDriver;
 import pageObjects.HomePage;
 import pageObjects.LoginPage;
 import pageObjects.SearchPage;
+import utils.BaseUtils;
 
 public class PageObjectManager {
 
