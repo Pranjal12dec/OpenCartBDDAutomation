@@ -16,6 +16,9 @@ public class LoginPageValidation {
   TestContext testContext;
   LoginPage loginPage;
 
+  private String UserName;
+  private String Password;
+
   public LoginPageValidation(TestContext context) {
     testContext = context;
     loginPage = testContext.getPageObjectManager().getLoginPage();
@@ -33,6 +36,8 @@ public class LoginPageValidation {
 
   @Then("The user enters the {string} and {string}")
   public void the_user_enters_the_and(String username, String password) {
+    UserName = username;
+    Password = password;
     loginPage.enterEmailAddress(username);
     loginPage.enterPassword(password);
   }
@@ -46,11 +51,14 @@ public class LoginPageValidation {
   public void the_user_should_be_logged_in_or_shown_error_message_based_on_credentials() {
     if (loginPage.getCurrentPageName().equalsIgnoreCase("My Account")) {
       log.info("-----------------------------------------------------------------------------");
-      log.info("<---- User has successfully logged in ---->");
+      log.info("<---- User has successfully logged in using -- UserName = " + UserName
+          + " and Password = " + Password + " ---->");
       log.info("--------------------------------------------------------------------------\n\n");
     } else {
       log.error("-----------------------------------------------------------------------------");
-      log.error("<---- User was unable to login ---->");
+      log.error(
+          "<---- User was unable to login using -- UserName = " + UserName + " and Password = "
+              + Password + " ---->");
       log.error("Error Message:: " + loginPage.getLoginErrorMessage());
       log.error("--------------------------------------------------------------------------\n\n");
       assertThat(loginPage.getLoginErrorMessage())

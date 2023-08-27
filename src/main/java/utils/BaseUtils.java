@@ -49,9 +49,9 @@ public class BaseUtils {
     }
   }
 
-  public void waitUntilPageTitleIsFound(WebDriver driver, String pageTitle){
+  public void waitUntilPageTitleIsFound(WebDriver driver, String pageTitle) {
     WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
-    log.info("::::: Waiting for Page Title::::: "+pageTitle+" To be displayed");
+    log.info("::::: Waiting for Page Title::::: " + pageTitle + " To be displayed");
     wait.until(ExpectedConditions.titleContains(pageTitle));
   }
 }

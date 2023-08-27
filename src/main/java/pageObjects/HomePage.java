@@ -63,7 +63,7 @@ public class HomePage extends BaseUtils {
   }
 
   public boolean validateHeaderItems() {
-    boolean isRightNavDisplayed = right_nav_items.size()>=5;
+    boolean isRightNavDisplayed = right_nav_items.size() >= 5;
     return (nav_container.isDisplayed() && nav_item_currency.isDisplayed()
         && isRightNavDisplayed);
   }
